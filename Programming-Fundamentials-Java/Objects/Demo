@@ -1,0 +1,72 @@
+package ObjectsAndClasses;
+
+import java.math.BigInteger;
+
+public class Demo {
+    static class Student { // POJO - "plain old Java object" -> клас, който съдържа данни заедно (Student)
+        // или клас, който do complex operations -> Scanner scanner = new scanner.nextLine;
+        // извикване на конструктор -> ctrl + insert -> маркирам параметрите, които искам да включва
+        public Student(int id, String name, int age) {
+            this.id = id;
+            this.name = name;
+            this.age = age;
+        }
+        //  GETTER  за полето name
+        String getName () {
+            return this.name;
+        }
+        //  SETTER
+        void  setName (String name){
+            this.name = name;
+        }
+
+        int id;
+        String name;
+        int age;
+
+        // конструктор -> метод, който създава обект, казва се с името на класа и няма return тип
+        Student  (String name, int id, int age){
+            this.name = name;
+            this.id = id;
+            this.age = age;
+        }
+
+         String getAinfo() {
+            return "age: " + this.age + ", " + "ID: " + this.id + ", " + "name: " + this.name;
+        }
+    }
+
+    public static void main(String[] args) {
+        // нов обект от типа Student е създаден в паметта (по подобие на нов лист)
+        // при създаването си този Student е празен
+
+        // ФАКТОРИЕЛ - ФОРМУЛА 5 - > 1*2*3*4*5
+        int n = 5;
+        BigInteger factoriel = BigInteger.valueOf(1);
+        for (int i = 1; i <=n ; i ++) {
+            factoriel = factoriel.multiply(BigInteger.valueOf(i));
+        }
+        System.out.println(factoriel);
+
+
+
+        Student a = new Student( "Lili", 34566778, 33);
+        a.setName("Lili is the best and will be a huge success!");
+        System.out.println(a.getName());
+
+        // на "а" възрастта става 30, когато имам обекти казвам обекта (а) . и казвам какво ще правя
+        ;
+        //ctr+alt+v върху скобите на System.out.println и конкатениратните стрингове
+        // method (Student)
+
+        System.out.println(a.getAinfo());
+
+        Student b = new Student("Joro", 12345678, 30);
+        // Student -> class b -> object
+
+        System.out.println(b.getAinfo());
+        // когато го извикам на b.getAinfo, this ще се отнася за b
+    }
+
+
+}
