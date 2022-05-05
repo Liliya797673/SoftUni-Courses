@@ -1,0 +1,57 @@
+package Exam;
+
+import java.util.Scanner;
+
+public class ExperienceGaining {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        double amountNeededExperience = Double.parseDouble(scanner.nextLine());
+
+        int countBattles = Integer.parseInt(scanner.nextLine());
+        int currentBattleCount = 0;
+        boolean pointsAreEnough = false;
+        double sumExperience = 0.0;
+
+        for (int i = 0; i <countBattles; i++) {
+
+            if (sumExperience >= amountNeededExperience) {
+                pointsAreEnough = true;
+                countBattles=i;
+                break;
+            }
+
+            // колкото са countBattles толкова пъти чета experienceEarnedPerBattle
+
+            double experienceEarnedPerBattle = Double.parseDouble(scanner.nextLine());
+            // запазввам в sumExperience общата сума от experienceEarnedPerBattle за всички игри
+
+            if (currentBattleCount % 3 == 0) {
+                experienceEarnedPerBattle = experienceEarnedPerBattle * 1.15;
+            } else if (currentBattleCount % 5 == 0) {
+                experienceEarnedPerBattle = experienceEarnedPerBattle - 0.10 * experienceEarnedPerBattle;
+            } else if (currentBattleCount % 15 == 0) {
+                experienceEarnedPerBattle = experienceEarnedPerBattle - 0.05 * experienceEarnedPerBattle;
+            }
+
+            sumExperience += experienceEarnedPerBattle;
+            currentBattleCount++;
+        }
+
+        if (sumExperience<amountNeededExperience){
+            System.out.printf("Player was not able to collect the needed experience, %.2f more needed.", Math.abs(sumExperience-amountNeededExperience));
+        }else {
+            System.out.printf("Player successfully collected his needed experience for %d battles.", currentBattleCount);
+        }
+
+    }
+
+
+}
+
+//if (pointsAreEnough) {
+//            System.out.printf("Player was not able to collect the needed experience, %.2f more needed.", amountNeededExperience - sumExperience);
+//
+//        } else {
+//            System.out.printf("Player was not able to collect the needed experience, %.2f more needed.")
+//        }
