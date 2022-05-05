@@ -1,0 +1,45 @@
+package Exam;
+
+import java.util.Scanner;
+
+public class First {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        // 5
+        // 25
+        // 30
+        // 12
+        // 19
+        // 24
+        // 16
+        // 20
+
+        int countStudents = Integer. parseInt(scanner.nextLine());
+        int countLectures = Integer. parseInt(scanner.nextLine());
+        int initialBonusPerCourse =Integer. parseInt(scanner.nextLine());
+
+        // колкото са учениците, до толкова да върти цикъла
+        int sumAttendance = 0;
+        double maxBonus = 0;
+        int maxAtendance = 0;
+        for (int student = 0; student < 5; student ++) {
+
+            int attendances = Integer. parseInt(scanner.nextLine());
+           // в for цикъла освен да чета присъствие, мога да сметна за всеки студент какъв му е
+            // {total bonus} = {student attendance} / {course lectures} *(5+ {additional bonus}
+            double currentBonus = (attendances/(countLectures*1.0)) * (5+initialBonusPerCourse);
+
+            if (currentBonus>maxBonus){
+                maxBonus=currentBonus;
+                maxAtendance = attendances;
+            }
+        }
+        System.out.printf("Max Bonus: %.0f.", Math.ceil(maxBonus));
+        System.out.printf("The student %d", maxAtendance);
+
+
+        // TODO
+        // program that calculates bonus points for each Student for a certain course
+        // the bonus is calculated: {total bonus} = {student attendance} / {course lectures} *(5+ {additional bonus}
+    }
+}
