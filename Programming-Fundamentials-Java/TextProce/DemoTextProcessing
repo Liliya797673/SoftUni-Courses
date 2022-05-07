@@ -1,0 +1,46 @@
+package TextProcessing;
+
+import java.util.Scanner;
+
+public class DemoTextProcessing {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String text = "the quick brown fox jumps over the lazy dog";
+        // искам да разделя по split стринга text и като го срещна split да взема
+        // частта от стринга преди split и след него включително и да ги изпечатам поотделно
+        // the
+        // quick brown fox jumps over the lazy dog
+        char split = 'q';
+
+        int splitIndexElse = text.indexOf(split);
+        //1. търся split, като започвам с идеята, че може да го няма
+        // в началния низ от текст -> int splitIndex = -1
+        int splitIndex = -1;
+        for (int i = 0; i < text.length() ; i ++) {
+        // 2. обхождам целият Стринг text и питам - ако текущият индекс ми е равен на split,
+        // значи съм намерила split и той е текущият индекс
+            if (text.charAt(i) == split){
+                splitIndex = i;
+                break;
+
+            }
+        }
+        if (splitIndex != -1){
+            String beforeSplit = text.substring(0, splitIndex);
+            String afterSplit = text.substring(splitIndex);
+            System.out.println(beforeSplit);
+            System.out.println(afterSplit);
+
+        } else {
+            System.out.println(text);
+        }
+
+        // substring - метод, който има два параметъра startIndex и endIndex
+       // System.out.println(text.substring(4, 9));
+        // substring - метод, който има два параметъра startIndex до края на дължината на text
+       // System.out.println(text.substring(4));
+
+    System.out.println(splitIndexElse);
+    }
+}
