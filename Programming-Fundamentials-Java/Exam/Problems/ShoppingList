@@ -1,0 +1,68 @@
+package Exam;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class ShoppingList {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        // имам лист, който е продукти, разделени по !
+        // Tomatoes! Potatoes! Bread
+        List<String> productList = Arrays.stream(scanner.nextLine().
+                split("!")).collect(Collectors.toList());
+
+        // прочитам си List String от конзолата поделен по !
+        // ще чета команди докато не получа команда "Go Shopping!"
+        String inputLine = scanner.nextLine();
+        // чета команди докато не получа "Go Shopping!"
+        // inputLine може да е Urgent Unnecesssary Correct или "Go Shopping!"
+        while (!inputLine.equals("Go Shopping!")) {
+            // създавам Стринг масив, в който държа Urgent {item} като два отделни елемента
+            String[] commandArr = inputLine.split(" ");
+            String command = commandArr[0];
+            // дай ми командата, която е на 0 позиция и елемента, който е на 1 позиция
+            switch (command) {
+                case "Urgent":
+                    String itemToAdd = commandArr[1];
+                    if (!productList.contains(itemToAdd)) {
+                        productList.add(0, itemToAdd);
+                    }
+                    break;
+                case "Unnecessary":
+                    String itemToRemove = commandArr[1];
+                    if (!productList.contains(itemToRemove)) {
+                        productList.remove(itemToRemove);
+                    }
+                    break;
+                case "Correct":
+
+                    String oldItem = commandArr[1];
+                    String newItem = commandArr[2];
+                    for (int i = 0; i < productList.size() ; i ++) {
+                        if (productList.get(i).equals(oldItem)){
+                            productList.set(i, newItem);
+
+                        }
+                    }
+
+                    break;
+                case "Rearrange":
+                    String itemToRearrange = commandArr[1];
+                    if (productList.contains(itemToRearrange)){
+                        productList.remove(itemToRearrange);
+                       productList.add(itemToRearrange);
+                    }
+                    break;
+            }
+
+
+            inputLine = scanner.nextLine();
+
+
+        }
+        // работи само за Стрингове
+        System.out.println(String.join(", ", productList));
+    }
+}
