@@ -1,0 +1,47 @@
+package TextProcessing;
+
+import java.util.Scanner;
+
+public class AllIndexesInWord {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        //     0123456789123456789123456789123456789123456789
+        String text = "the quick brown fox jumps over the lazy dog";
+
+       char search = 't';
+        String searchString = "ox";
+
+        int index = text.indexOf(search);
+
+        //целта ми е да намеря всички срещания на search. С text.indexOf(search)
+        // намирам само първия индекс, на който се среща
+        while (index != -1) {
+            // indexOf връща -1 , когато не намери нищо
+         System.out.println(index);
+           System.out.println(searchString);
+            // изпечатай ми този индекс и кажи, че е равен на text.indexOf(search)
+            // това, което търся, но от този индекс, нататък
+           index = text.indexOf(search, index + 1);
+
+        }
+
+        // в  обратен ред отзад напред да ги вади
+
+        String textTwo = "the quick brown fox jumps over the lazy dog";
+        String searchStringLastToFirst = "the";
+
+      int indexLast = textTwo.lastIndexOf(searchStringLastToFirst);
+
+        // целта ми е да намеря всички срещания на search. С text.indexOf(search)
+        // намирам само първия индекс, на който се среща
+       while (indexLast != -1) {
+            // indexOf връща -1 , когато не намери нищо
+         System.out.println(indexLast);
+
+            // изпечатай ми този индекс и кажи, че е равен на text.indexOf(search)
+            // това, което търся, но от този индекс, нататък
+           indexLast = textTwo.lastIndexOf(searchStringLastToFirst, indexLast - 1);
+
+       }
+    }
+}
