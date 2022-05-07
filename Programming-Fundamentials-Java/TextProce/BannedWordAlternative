@@ -1,0 +1,20 @@
+package TextProcessing;
+
+import java.util.Scanner;
+
+public class BannedWordAlternative {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] bannedWordsArr = scanner.nextLine().split(", ");
+        String textToSearch = scanner.nextLine();
+
+        for (String bannedWord : bannedWordsArr){
+            if(textToSearch.contains(bannedWord)){
+                textToSearch = textToSearch.replace(bannedWord, bannedWord.repeat(bannedWord.length()));
+            }
+
+        }
+        System.out.println(textToSearch);
+    }
+}
