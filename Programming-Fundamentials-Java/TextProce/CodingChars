@@ -1,0 +1,30 @@
+package TextProcessing;
+
+import java.util.Scanner;
+
+public class CodingChars {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // "Programming is cool!"
+
+        String decryptedText = scanner.nextLine();
+        String encryptedText = "";
+
+        // трябва да обходя всеки символ на decryptedText
+
+        for (char symbol: decryptedText.toCharArray()) {
+
+            // превръщам decryptedText в масив от чарове и казвам, за всеки чар
+            // кодирам decryptedText
+            char encryptedSymbol = (char) (symbol+3);
+            // за съответната итерация, вземи ми символа и към него добави 3,
+            // а след това ми върни char стойността на int от сбора на ASKII кодовете
+            // добавям encryptedSymbol към кодирания текст
+
+            encryptedText += encryptedSymbol;
+
+        }
+        System.out.println(encryptedText);
+    }
+}
