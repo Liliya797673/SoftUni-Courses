@@ -1,0 +1,23 @@
+package ObjectsAndClasses;
+
+public class MethodAreaClass {
+    static class Circle{
+        double radius; // PI * radius * radius
+
+        double getArea () {
+            return Math.PI * radius * radius;
+        }
+    }
+
+
+    public static void main(String[] args) {
+
+        Circle circle = new Circle();
+        circle.radius = 5;
+        double r = circle.radius;
+
+        System.out.println(circle.getArea());
+       // double area = Math.PI * r * r;
+       // System.out.println(area);
+    }
+}
