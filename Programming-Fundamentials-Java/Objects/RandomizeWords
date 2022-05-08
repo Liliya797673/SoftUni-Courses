@@ -1,0 +1,33 @@
+package ObjectsAndClasses;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class RandomizeWords {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+
+        String [] inputArr = input.split("\\s+");
+
+        Random randomGenerator = new Random();
+
+        for (int i = 0; i < inputArr.length ; i ++) {
+
+        // взимам случайно число, което се генерира от randomGenerator и аз му казвам да не излиза от дължината на масива
+        int x = randomGenerator.nextInt(inputArr.length);
+        int y = randomGenerator.nextInt(inputArr.length);
+
+        // swapping elements in array
+        // създавам си Стринг, в който ще паза старата стойност на индекса, на който ще слагам нова стойност
+           String oldWordX = inputArr[x];
+           inputArr[x] = inputArr[y]; // след този ред  inputArr[x] ще бъде заместено и затова запазвам стойността в oldWordX
+           inputArr[y] = oldWordX;
+         //  по този начин разменям елемента на позиция / Index X с елемента на позиция Index Y
+
+        }
+        // принтирам с LineSeparator
+        System.out.println(String.join(System.lineSeparator(), inputArr));
+    }
+}
