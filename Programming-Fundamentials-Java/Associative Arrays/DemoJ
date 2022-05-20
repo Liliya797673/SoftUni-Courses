@@ -1,0 +1,56 @@
+package AssociativeArraysMaps;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+public class DemoJ {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String digitName = scanner.nextLine();
+        Map<String, Integer> digitValues = new HashMap<>();
+        // добавя ги разбъркано
+        // Map<String, Integer> digitValues = new linkedHashMap<>();
+        // добавя елементите в реда, в който съм ги създала
+        // Map<String, Integer> digitValues = new TreeMap<>();
+        // добавя елементите в реда на ключовете
+
+        //.put -> добавям елементи в масива по Key/Value
+        digitValues.put("zero", 0);
+        digitValues.put("one", 1);
+        digitValues.put("two", 2);
+        digitValues.put("three", 3);
+        digitValues.put("four", 4);
+        digitValues.put("five", 5);
+        digitValues.put("six", 6);
+        digitValues.put("seven", 7);
+        digitValues.put("eight", 8);
+        digitValues.put("nine", 9);
+        digitValues.put("ten", 10);
+
+        // .remove -> премахвам елемент, като задавам key, което е със смисъла на index като при List
+        digitValues.remove("zero");
+
+        // iterate -> foreach по структурата Map, която е комбинация от Key + Value
+        // mapName.)ALT + Enter -> iterate
+
+        // containsKey + взимане на въпросния Key
+        Integer result = digitValues.get("nine");
+        if (result!=null){
+            System.out.println("true " + " -> " + result);
+        }else {
+          System.out.println("false");
+        }
+
+        for (Map.Entry<String, Integer> entry : digitValues.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+            //цикълът ми казва .entrySet (дай ми записите си
+            // и за всеки запис вземи стойносста, вземи клча / или само едното или другото
+        }
+
+        // как взимам .get
+        System.out.println(digitValues.get(digitName));
+
+    }
+}
