@@ -1,0 +1,59 @@
+package AssociativeArraysMaps;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class DemoNew {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        Map <String, Person> phoneBook = new HashMap<>();
+
+        //phoneBook.put("Ivan", "0883479100");
+        // phoneBook.put("Peter", "0883456789");
+        // phoneBook.put("Simo", "0883456788");
+       // phoneBook.put("Maria", "0887654234");
+
+        Person peter = new Person("Ivan", "0883479100");
+        Person ivan = new Person("Peter", "0883456789");
+        Person maria = new Person("Maria", "0887654234 ");
+
+        phoneBook.put(peter.getName(),peter);
+        phoneBook.put(peter.getName(),ivan);
+        phoneBook.put(peter.getName(),maria);
+
+        phoneBook.forEach((key, value) -> System.out.printf("Name: %s --- Phone: %s%n", value.getName(), value.getPhoneNumber()));
+        phoneBook.entrySet().forEach((entry) -> System.out.printf("Name: %s --- Phone: %s%n", entry.getKey(), entry.getValue()));
+
+        // entry = key + value
+    }
+    static class Person {
+        public Person(String ivan, String s) {
+            this.name = name;
+            this.phoneNumber = phoneNumber;
+        }
+        String name;
+        String phoneNumber;
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setPhoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getPhoneNumber() {
+            return phoneNumber;
+        }
+
+
+
+
+    }
+}
