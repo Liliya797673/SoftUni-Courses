@@ -1,0 +1,54 @@
+package AssociativeArraysMaps;
+
+import java.util.*;
+
+public class Demo {
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        // Map -> key - <типа данни> value <типа данни>
+        // в Map ще въведа име и брой резервации като ще използвам за key името (String), а за value броя места,
+        // които съм прочела и поделила по специален символ
+        Map<String, Integer> recervationMap = new TreeMap<>();
+
+        String input = scanner.nextLine();
+
+        // Veronika 20
+        while (!input.equals("end")) {
+
+            String[] holder = input.split(" ");
+
+            String holderName = holder[0];
+            int seats = Integer.parseInt(holder[1]);
+
+            // При използване на Map.put при срещане на Key, който вече е в Mapa,
+            // новият Key overwrite-ва старият
+            recervationMap.put(holderName, seats);
+            input = scanner.nextLine();
+        }
+
+        // достъпване на елементите на Mapa -> key  value чрез foreach цикъл,
+        // който се вика като recervationMap.entrySet() + Alt+Enter-> Iterate
+        // Map.entrySet() -> това ми дава всеки елемент като сет от key+value
+
+        for (Map.Entry<String, Integer> entry : recervationMap.entrySet()) {
+                // колекция от String, Integer (key value) = entry ->
+               // всеки запис в Mapa -> това е един запис в Mapa -> Lili 6
+
+            System.out.printf("%s -> %s%n", entry.getKey(), entry.getValue());
+        }
+
+        String searchHolder = scanner.nextLine();
+            // правя проверка дали търсеният ключ се съдържа в Mapa - ако да, ще го изпринтира, else
+        if(recervationMap.containsKey(searchHolder)){
+            System.out.println(recervationMap.get(searchHolder));
+            // map.get - достъпвам ключа
+        }else {
+            System.out.println("No such resetvation, searchHolder");
+            System.out.println();
+        }
+
+
+    }
+}
