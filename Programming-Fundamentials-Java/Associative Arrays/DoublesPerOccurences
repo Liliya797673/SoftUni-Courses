@@ -1,0 +1,30 @@
+package AssociativeArraysMaps;
+
+import java.util.*;
+
+public class DoublesPerOccurences {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        // TODO find the doubles and combine them based on times there are occurrences  8.0 -> 2
+        List<Double> numbers = new ArrayList<>(Arrays.<Double>asList(8.0, 6.7,4.4, 8.0, 4.4, 7.0, 4.5,4.5, 4.5, 6.7, 5.5, 4.4));
+        Map<Double, Integer> numberCount = new TreeMap<>();
+        for (Double number : numbers) {
+            // минавам по новосъздадения Мap и имам две възможности: текущото число вече да е срещано и да е добавено
+            // или да се среща за първи път и да трябва да го добавя
+            // на първата итерация 8.0 не се съдържа
+            if (numberCount.containsKey(number)){
+                int currentCount = numberCount.get(number);
+                numberCount.put(number, currentCount + 1);
+
+            } else {
+                numberCount.put(number, 1);
+            }
+
+        }
+        for (Map.Entry<Double, Integer> entry : numberCount.entrySet()) {
+            System.out.println(entry.getKey() + "-> " + entry.getValue());
+        }
+
+
+    }
+}
