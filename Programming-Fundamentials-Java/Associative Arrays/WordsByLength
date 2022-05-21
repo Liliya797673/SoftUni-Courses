@@ -1,0 +1,47 @@
+package AssociativeArraysMaps;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class WordsByLength {
+    public static void main(String[] args) {
+        List <String> words = new ArrayList<>();
+        words.add ("hello");
+        words.add("bye");
+        words.add("the");
+        words.add("quick");
+        words.add("brown");
+        words.add("fox");
+        words.add("jumps");
+        words.add("fox");
+        words.add("jumps");
+        words.add("the");
+        words.add("lazy");
+        words.add("dog");
+
+
+        Map<Integer, List<String>> wordsByLength = new TreeMap<>();
+        for (String word : words) {
+          int key = word.length();
+            List <String> values = wordsByLength.get(key);
+            if (values!=null){
+           //"срещал ли съм го този ключ досега"
+                values.add(word);
+            }else {
+                values = new ArrayList<>();
+                // създавам си values и добавям думата във values
+                values.add(word);
+                wordsByLength.put(key, values);
+            }
+        }
+        for (Map.Entry<Integer, List<String>> entry : wordsByLength.entrySet()) {
+            System.out.println(entry.getKey() + "-> " + entry.getValue());
+        }
+
+            // тръгвам по всички думи, взимам й ключа (дължината на думата),
+        // ключа, с който ще я добавям и казвам по тажи дължната стойностите
+    }
+}
