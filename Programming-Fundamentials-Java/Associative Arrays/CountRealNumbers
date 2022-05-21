@@ -1,0 +1,41 @@
+package AssociativeArraysMaps;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class CountRealNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        //8 2 2 8 2 -> 8 -> 2
+        //             2 -> 3
+        //           Key -> Value
+        // "8", "2", "2", "8", "2"
+        // да създам масив от String
+        // да мина по масива от чарове -> for и да взема всяко число
+        // да създам Map и да го напълня с Key всяко прочетено число
+        // и Value броя пъти, в които то се среща (counter на пъти срещане
+
+       List<Double> numberList = Arrays
+               .stream(scanner.nextLine().split(" "))
+               .map(Double::parseDouble)
+               .collect(Collectors.toList());
+       Map <Double, Integer> countNumbers = new TreeMap<>();
+        for (int i = 0; i <numberList.size() ; i ++) {
+
+            double currentNumber = numberList.get(i);
+            if (!countNumbers.containsKey(currentNumber)){
+                countNumbers.put(currentNumber, 1);
+            }else{
+                countNumbers.put(currentNumber, countNumbers.get(currentNumber) + 1);
+            }
+        }
+        // Печатане с шаблон за махане на 000
+        for (Map.Entry<Double, Integer> entry : countNumbers.entrySet()) {
+            System.out.printf("%.0f -> %d%n", entry.getKey(), entry.getValue());
+        }
+
+
+    }
+    }
+
