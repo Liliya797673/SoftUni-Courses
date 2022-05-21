@@ -1,0 +1,91 @@
+package AssociativeArraysMaps;
+
+import java.util.*;
+
+public class LegendaryFarming {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        //•	"Shadowmourne" - requires 250 Shards
+        //•	"Valanyr" - requires 250 Fragments
+        //•	"Dragonwrath" - requires 250 Motes
+
+        //"Shards", "Fragments", and "Motes" are the key materials
+        // junks - > Пазя останлите материали
+        //You will be given lines of input in the format:
+        // "{quantity1} {material1}
+        // {quantity2} {material2}
+        // {quantityN} {materialN}"
+        // ще си създам два мапа - в първия мап ще пазя важните материали, а във втория - junk
+
+        Map<String, Integer> materials = new TreeMap<>();
+        // знам, че в този мап ще пазя само 3 основни материала, затова предварително мога да го напълня
+        // като добавям материалите за key и 0 за Value в началото
+        materials.put("shards", 0);
+        materials.put("fragments", 0);
+        materials.put("motes", 0);
+        // сортирани по азбучен ред - > TreeMap
+        Map<String, Integer> junk = new TreeMap<>();
+        // ще ни се въвеждат материали докато някой измежду materials не достигне 250
+        // използвам while за да продължавам да чета нови редове
+        boolean isOver = false;
+        while (!isOver){ // прекъсваме, когато спечелим предмет
+            // получавам нов ред и в този Input имам разделени данни с интервал [5 shards, 34 motes, ]
+            String input = scanner.nextLine();
+            // ще направя Стринг масив по input-а разделен с интервал
+            String [] inputData = input.split(" ");
+           // трябва да обходя масива (for) и да достъпвам индексите като ми трябват 0 и 1; 2 и 3; 4 и 5 и т.н
+            // ["3", "Motes", "5", "stones", "5", "Shards",
+            // "6",  "leathers",  "255"  "fragments",  "7" "Shards"]
+            for (int index = 0; index <inputData.length; index += 2){
+                // на всяко завъртане през 2 взимам quantity, което е текущият index
+                int quantity = Integer.parseInt(inputData[index]);
+                String material = inputData[index+1].toLowerCase(Locale.ROOT);
+                // материалът ми стои на позицията на количеството + 1, като материалът може да е въведен както с главна,
+                // така и с малка буква, затова използваме toLowerCase(Locale.ROOT)
+                // проверка дали материалът е валиден (Shards, Fragments, Motes)
+
+                if (material.equals("shards") || material.equals ("fragments") ||material.equals ("motes")){
+                    int currentQuantity = materials.get(material);
+                    materials.put(material, currentQuantity+quantity);
+                    if (materials.get(material) >=250) {
+                        if (material.equals("shards")){
+                            System.out.println("Shadowmourne obtained!");
+                        } else if (material.equals("fragments")){
+                            System.out.println("Valanyr obtained!");
+                        } else if (material.equals("motes")){
+                            System.out.println("Dragonwrath obtained!");
+                        }
+                        // след като си купя материала, трябва да намаля количеството с 250
+                        materials.put(material, materials.get(material) -250);
+                        isOver = true;
+                        // прекъсваме while
+                        break;
+                      // с този break прекъсваме for цикъла, но ни трябва да прекъснем и while
+                    }
+                } else {
+                    // junk
+                if (!junk.containsKey(material)){
+                    junk.put(material, quantity);
+
+                    } else {
+                    int currentQuantity = junk.get(material);
+                    junk.put(material, currentQuantity + quantity);
+                }
+
+                }
+            }
+        }
+        // сортираме материалите -> descending order -> намаляващ ред на количеството (преди това с tree map сме сортирали по азбучен ред)
+        // .stream() обработва всеки един от записите в entrySet
+        // взимаме два по два записите и сравняваме, ако вторият е по-голям от първият, разменяме,
+        // ако са равни или вторият е по-малък, не правим нищо
+        materials.entrySet().stream()
+                .forEach(entry -> System.out.println(entry.getKey() +": "+entry.getValue()));
+
+        junk.entrySet().forEach(entry -> System.out.println(entry.getKey() +": "+entry.getValue()));
+
+    }
+
+}
+//.sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
