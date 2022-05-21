@@ -1,0 +1,29 @@
+package AssociativeArraysMaps;
+
+import java.util.*;
+
+public class NumbeKey {
+    public static void main(String[] args) {
+
+
+
+        List<Double> numbers = new ArrayList<>(Arrays.<Double>asList(8.0, 8.1, 2.4, 8.0, 2.0, 8.0, 8.1, 2.4, 8.0, 2.0));
+        Map<Double, Integer> numberCounts = new TreeMap<>();
+        for (Double number : numbers) {
+
+            if (numberCounts.containsKey(number)){
+                int currentCount = numberCounts.get(number);
+                // ако новосъздаденият Map numberCounts съдържа число (number) от List numbers
+                numberCounts.put(number, currentCount + 1);
+                // тогавашната му бройка + 1
+            }else {
+                numberCounts.put(number, 1);
+
+            }
+        }
+        for (Map.Entry<Double, Integer> entry : numberCounts.entrySet()) {
+            System.out.println(entry.getKey() + "-> " + entry.getValue());
+        }
+
+    }
+}
