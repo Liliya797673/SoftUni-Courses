@@ -1,0 +1,65 @@
+package Exam;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+public class Numbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // numbers in a sequence on a single line separated by space -> първи ред
+        // команди, които модифицират листа по различен начин до получаване на Finish
+        //o	"Add {value}"
+        //o	"Remove {value}"
+        //o	"Replace {value} {replacement}"
+        //o	"Collapse {value}"
+        //o	"Finish"
+        // 1 4 5 19 - първата линия
+        List<Integer> numList = Arrays
+                .stream(scanner.nextLine().split(" "))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        String inputCommand = scanner.nextLine();
+
+        while (!inputCommand.equals("Finish")) {
+            List<String> commandList = Arrays.stream(inputCommand.split(" "))
+                    .collect(Collectors.toList());
+            String command = commandList.get(0);
+            switch (command) {
+                case "Add":
+                    int valueToAdd = Integer.parseInt(commandList.get(1));
+                    numList.add(valueToAdd);
+                    break;
+                case "Remove":
+                    int numRemove = Integer.parseInt(commandList.get(1));
+                    numList.removeIf(number -> number == numRemove);
+                    break;
+                case "Replace":
+                    int numValue = Integer.parseInt(commandList.get(1));
+                    int replacement = Integer.parseInt(commandList.get(2));
+                    if (numList.contains(numValue)) {
+                        int index = numList.indexOf(numValue);
+                        numList.set( index, replacement);
+                    } else {
+                        continue;
+                    }
+                        break;
+
+                        case "Collapse":
+                            int collapseValue = Integer.parseInt(commandList.get(1));
+                            numList.removeIf(number -> number < collapseValue);
+                            break;
+                    }
+
+                    inputCommand = scanner.nextLine();
+
+            }
+            for (int elements : numList) {
+                System.out.print(elements + " ");
+            }
+        }
+    }
+
