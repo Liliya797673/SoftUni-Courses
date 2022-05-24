@@ -1,0 +1,63 @@
+package AssociativeArraysMaps;
+
+import java.util.*;
+
+public class StudentAcademy {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Write a program, which keeps information about students and their grades.
+        //John -> 5.00 6.00 5.50
+        //George -> 5.00
+        //Alice -> 4.50
+        Map <String, List<Double>> studentGradeMap = new LinkedHashMap<>();
+        int n = Integer.parseInt(scanner.nextLine());
+        for (int i = 0; i < n; i ++){
+
+            String studentName = scanner.nextLine();
+            double studentGrade = Double.parseDouble(scanner.nextLine());
+
+
+        // Check if student already exists, and if not - add him. Keep track of all grades for each student.
+
+           if (!studentGradeMap.containsKey(studentName)) {
+               studentGradeMap.put(studentName, new ArrayList<>());
+               studentGradeMap.get(studentName).add(studentGrade);
+           }else {
+               // ако студентът вече е в мапа, значи цикълът е завъртял, добавен е и сме прочели нови оценки
+               studentGradeMap.get(studentName).add(studentGrade);
+               // studentGradeMap.get(studentName) ->
+               // достъпвам листа с вече съществуващите оценки и .add добавям тази на настоящата итерация
+           }
+          //  studentGradeMap.entrySet().stream().filter(s -> s.getValue().stream().mapToDouble(x -> x).average().orElse(0) >= 4.50);
+        }
+       // търсим средната оценка на всеки студент
+        Map <String, Double> studentAverGrade = new LinkedHashMap<>(); // ако имаме равни studentAverGrade, ще отпечата първо този, който е въведен пръв
+        // тук ще пазя само студентите и общата им средна оценкта - дипломата за средно
+        for (Map.Entry<String, List<Double>> entry : studentGradeMap.entrySet()) {
+        // за всеки един студент в моя мап, който е от Стрин и Лист от дабъли
+        // да си взема средно аритметичното от оценките
+        // entry -> име (String) + списък с оценки (list <double>)
+            String studentName = entry.getKey();
+            // взимам си името на студента, което ми е недостъпно в този for
+            List <Double> grades = entry.getValue();
+            // създавам си метод, който да намера averageGrade
+            double averageGrade = getAverageGrade (grades);
+            if (averageGrade >= 4.5){
+                studentAverGrade.put(studentName, averageGrade);
+            }
+        }
+        studentAverGrade.entrySet().stream().sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()))
+                .forEach(entry -> System.out.printf("%s -> %.2f%n", entry.getKey(), entry.getValue()));
+    }
+
+    private static double getAverageGrade(List<Double> grades) {
+        double sumGrades = 0;
+        for (double grade: grades) {
+            sumGrades+=grade;
+        }
+        return sumGrades/grades.size();
+    }
+}
+
+// мога да намеря average И със стрийм: studentGradeMap.entrySet().stream().filter(s -> s.getValue().stream().mapToDouble(x -> x).average().orElse(0) >= 4.50);
