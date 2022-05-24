@@ -1,0 +1,80 @@
+package TextProcessing;
+
+import java.util.Scanner;
+
+public class LettersChangeNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        // A12b s17G
+        String input = scanner.nextLine();
+
+        String[] passwordsArr = input.split("\\s+");
+
+        // ToDO: sum the password
+
+        double totalSum = 0;
+        // Общата сума от всички пароли
+
+        // трябва да обходя всяка парола и да намеря сумата
+
+        for (String password : passwordsArr) {
+            // пресмятам стойността на числото спрямо правилата
+            double modifiedNumber = getModifiedNumber(password);
+            // добавям числото от паролата към сумата
+            totalSum += modifiedNumber;
+        }
+        System.out.printf("%.2f", totalSum);
+
+    }
+
+    private static double getModifiedNumber(String password) {
+        // {буква) {число} {буква}
+        // P       34562     Z
+        char firstLetter = password.charAt(0);
+        char secondLetter = password.charAt(password.length() - 1);
+
+        // за да взема числото от паролата -> "P34562Z"
+        //                                     0     password.length() -1
+        StringBuilder builder = new StringBuilder(password);
+        double number = Double.parseDouble(builder.deleteCharAt(0).deleteCharAt(password.length() - 1).toString());
+        // в билдера имам цялата парола, искам от нея да махна буквите, които вече имам и затова ги
+        // изтривам задавайки позиця 0 и  password.length() -1
+        // .toString()), за да ги преобразувам в стринг и Double.parseDouble, за да ги запазя в double
+        //  double numberSecondWay = Double.parseDouble(password.replace(firstLetter, ' ').replace(secondLetter, ' ').trim());
+        // .trim - маха празните места в началото и края
+
+        //double numberThree = Double.parseDouble(password.substring(1, password.indexOf(secondLetter)));
+
+        //P 34562 Z" -> последният символ е невключително
+
+        // проверка дали първата буква е главна
+
+        if (Character.isUpperCase(firstLetter)) {
+            // намиране на позицията -> от ASCII кода вадим 4 за позицията в азбуката
+            int positionFirstLetter = (int)firstLetter - 64;
+            // число = число / positionFirstLetter на буквата firstLetter в азбуката
+            number /= positionFirstLetter;
+        } else {
+            //  буквата е малка -> проверка на ACKIi кода
+            int positionLowerCase = (int)firstLetter - 96;
+            number = number * positionLowerCase;
+        }
+        // проверка за втората буква, първо ако е с главни букви
+        if (Character.isUpperCase(secondLetter)) {
+            // намиране на позицията -> от ASCII кода вадим 4 за позицията в азбуката
+            int positionUpperLetter = (int)secondLetter - 64;
+            // число = число / positionFirstLetter на буквата firstLetter в азбуката
+            number = number - positionUpperLetter;
+
+        } else {
+            //  буквата е малка -> проверка на ACKIi кода
+            int positionLowerCase = (int)secondLetter - 96;
+            number = number + positionLowerCase;
+
+        }
+        return number;
+
+    }
+
+}
+
