@@ -1,0 +1,73 @@
+package AssociativeArraysMaps;
+
+import java.util.*;
+
+public class AverageGrade {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // TODO Write a program, which keeps information about students and their grades.
+
+        int n = Integer.parseInt(scanner.nextLine());
+        Map<String, List<Double>> allStudentsGrades = new LinkedHashMap<>();
+
+
+        for (int i = 0; i < n; i++) {
+
+            String name = scanner.nextLine();
+            double grade = Double.parseDouble(scanner.nextLine());
+
+            if (!allStudentsGrades.containsKey(name)) {
+                // ако го няма - добави го
+                allStudentsGrades.put(name, new ArrayList<>());
+                allStudentsGrades.get(name).add(grade);
+
+            } else {
+
+                // ако го има - дай ми списъка с досегашните записи и добави настоящата оценка
+                allStudentsGrades.get(name).add(grade);
+            }
+            Map <String, Double> studentAverageGrades = new LinkedHashMap<>();
+
+            for (Map.Entry<String, List<Double>> entry : allStudentsGrades.entrySet()) {
+                List<Double> listGrades = entry.getValue();
+                double averageGrade = getAverageGrade(listGrades);
+
+                if (averageGrade >= 4.50){
+                    studentAverageGrades.put(name, averageGrade);
+                }
+            }
+
+            studentAverageGrades.entrySet().stream().sorted((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue())).
+                    forEach(entry -> System.out.printf("%s -> %.2f%n", entry.getKey(), entry.getValue() ));
+        }
+
+
+// allStudentsGrades.forEach((key, value) -> {
+//                double averageGrade = value
+//                        .stream()
+//                        .mapToDouble(x -> x)
+//                        .average()
+//                        .orElse(0.0);
+//
+//                if (averageGrade >= 4.50) {
+//                    System.out.printf("%s -> %.2f%n", key, averageGrade);
+//                }
+//            });
+
+
+    }
+
+    private static double getAverageGrade(List<Double> grades) {
+        double sumGrades = 0;
+        for (double grade : grades) {
+            sumGrades += grade;
+
+        }
+
+        return sumGrades / grades.size();
+    }
+}
+
+
+
