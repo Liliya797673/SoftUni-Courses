@@ -1,0 +1,43 @@
+package AssociativeArraysMaps;
+
+import java.util.*;
+
+public class Orders {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        //Write a program, which keeps information about products and their prices.
+        // Each product has a name, a price and its quantity.
+        // If the product doesn't exist yet, add it with its starting quantity.
+
+        // input
+        // Beer 2.20 100
+        // TODO output Beer -> 220.00
+
+        String commandLine = scanner.nextLine();
+        Map<String, List<Double>> startingQuantityMap = new LinkedHashMap<>();
+        while (!commandLine.equals("buy")){
+        String [] commandPars = commandLine.split(" ");
+
+        String productName = commandPars[0];
+        Double price = Double.parseDouble(commandPars[1]);
+        Double quantity  = Double.parseDouble(commandPars[2]);
+
+        if (!startingQuantityMap.containsKey(productName)){
+            startingQuantityMap.put(productName, new ArrayList<>());
+            startingQuantityMap.get(productName).add(price);
+            startingQuantityMap.get(productName).add(quantity);
+
+        } else {
+            // сменям стойността като първо достъпвам листа -startingQuantityMap.get(productName) .set - слагам нова стойност на 0 позиция в лиса - Price
+            startingQuantityMap.get(productName).set(0, price);
+            startingQuantityMap.get(productName).set(1, startingQuantityMap.get(productName).get(1) + quantity);
+            // startingQuantityMap.get(productName).get(1) - старото количество + quantity - новото количество
+        }
+
+            commandLine = scanner.nextLine();
+
+        }
+
+        startingQuantityMap.forEach((k,v) -> System.out.printf("%s -> %.2f%n", k, v.get(0) * v.get(1)));
+    }
+}
