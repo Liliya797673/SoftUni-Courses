@@ -1,0 +1,24 @@
+package TextProcessing;
+
+import java.util.Scanner;
+
+public class TextToRemove {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // TODO - toRemove да се премахне от textToCheck
+        String toRemove = scanner.nextLine();
+        String textToCheck = scanner.nextLine();
+        // 1. първо намирам от къде започва toRemove в textToCheck и запазвам индекса в променлива
+
+        int index = textToCheck.indexOf(toRemove);
+
+        while (index != -1){
+
+            textToCheck = textToCheck.replace(toRemove, "");
+            index = textToCheck.indexOf(toRemove);
+        }
+
+        System.out.println(textToCheck);
+    }
+}
