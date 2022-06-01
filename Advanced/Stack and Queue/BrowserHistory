@@ -19,6 +19,11 @@ public class BrowserHistory {
                     currentUrl = history.pop();
                     // ако е back -> върни ме 1 назад, което става с изтриване на последното,
                     // обаче мога да трия само ако не е празен
+
+                } else {
+                    System.out.println("no previous URLs");
+                    nextNavigation = scanner.nextLine();
+                    continue;
                 }
 
             } else {
