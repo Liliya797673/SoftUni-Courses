@@ -1,0 +1,46 @@
+package StackAndQueues;
+
+import java.util.ArrayDeque;
+import java.util.Scanner;
+
+public class BrowserHistory {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String nextNavigation = scanner.nextLine();
+        String currentUrl = "blank";
+        // създавам опашка, за да запазя историята на отваряните сайтове - трябва ми последният
+        ArrayDeque<String> history = new ArrayDeque<>();
+        while (!nextNavigation.equals("Home")) {
+            // два вида инструкции:
+            // The string "back" sets the current URL to the last set URL
+            if (nextNavigation.equals("back")) {
+                if (!history.isEmpty()) {
+                    currentUrl = history.pop();
+                    // ако е back -> върни ме 1 назад, което става с изтриване на последното,
+                    // обаче мога да трия само ако не е празен
+                }
+
+            } else {
+                if (!currentUrl.equals("blank")) {
+                    history.push(currentUrl);
+                }
+                // Normal navigation: a URL is set, given by a string;
+
+                currentUrl = nextNavigation;
+            }
+            System.out.println(currentUrl);
+            nextNavigation = scanner.nextLine();
+        }
+
+    }
+
+}
+
+
+
+
+
+
+
+
