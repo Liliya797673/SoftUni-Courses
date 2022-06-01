@@ -1,0 +1,24 @@
+package StackAndQueues;
+
+import java.util.ArrayDeque;
+import java.util.Scanner;
+
+public class ReverseNumbersWithStack {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String inputLine = scanner.nextLine();
+
+        String [] inputArr = inputLine.split(" ");
+        ArrayDeque <Integer> stack = new ArrayDeque<>();
+
+        for (String element:inputArr) {
+            stack.push(Integer.parseInt(element));
+        }
+
+        for (String element: inputArr) {
+           System.out.printf("%s ", stack.pop());
+        }
+
+    }
+}
